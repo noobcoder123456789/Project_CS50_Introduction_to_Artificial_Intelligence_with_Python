@@ -1,2 +1,2 @@
-# Search_CS50
-This repository for Search's project of the course CS50’s Introduction to Artificial Intelligence with Python
+# CS50’s Introduction to Artificial Intelligence with Python
+This repository for project of the course CS50’s Introduction to Artificial Intelligence with Python
