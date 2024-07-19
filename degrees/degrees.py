@@ -89,30 +89,39 @@ def shortest_path(source, target):
     that connect the source to the target.
     If no possible path, returns None.
     """
-
-    # TODO
+    
+    if source == target:
+        return None
+    
     q = QueueFrontier()
-    visit = []    
+    visitMovie = set()
+    visitPerson = set()
     
     nfp = neighbors_for_person(str(source))
     for x in nfp:
-        q.add([(x[0], source)])
-        visit.append(x[0])
+        q.add([x])
+        visitMovie.add(x[0])
+        visitPerson.add(x[1])
 
-    while not(q.empty()):
+    while True:
+        if q.empty():
+            return None
+        
         state = q.remove()
         
-        if state[len(state) - 1][1] == target:
+        if state[len(state) - 1][1] == str(target):
             return state
-        
+                
         nfp = neighbors_for_person(str(state[len(state) - 1][1]))
-        for x in nfp:
-            temp = state
-            temp.append((x[0], x[1]))
-            visit.append(x[0])
-            q.add(temp)
+        for x in nfp:            
+            if not(x[0] in visitMovie) and not(x[1] in visitPerson):
+                temp = state
+                temp.append((x[0], x[1]))
+                visitMovie.add(x[0])
+                visitPerson.add(x[1])
+                q.add(temp)
 
-    return None
+    raise NotImplementedError
     
 
 def person_id_for_name(name):
