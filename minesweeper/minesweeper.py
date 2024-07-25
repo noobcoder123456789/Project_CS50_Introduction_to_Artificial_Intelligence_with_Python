@@ -226,20 +226,26 @@ class MinesweeperAI():
 
         # AI conclude additional knowledge
         temp = list()
-        # for i in range(len(self.knowledge)):
-        #     sentenceA = self.knowledge[i]
-        #     for j in range(len(self.knowledge)):
-        #         sentenceB = self.knowledge[j]
-        #         if sentenceA == sentenceB:
-        #             continue
+        removeSentence = list()
+        for i in range(len(self.knowledge)):
+            sentenceA = self.knowledge[i]
+            for j in range(len(self.knowledge)):
+                sentenceB = self.knowledge[j]
+                if sentenceA == sentenceB:
+                    continue
 
-        #         if (sentenceA.cells).issubset(sentenceB.cells):
-        #             temp.append(Sentence(sentenceB.cells - sentenceA.cells, sentenceB.count - sentenceA.count))
-        #         elif (sentenceB.cells).issubset(sentenceA.cells):
-        #             temp.append(Sentence(sentenceA.cells - sentenceB.cells, sentenceA.count - sentenceB.count))
+                if (sentenceA.cells).issubset(sentenceB.cells):
+                    temp.append(Sentence(sentenceB.cells - sentenceA.cells, sentenceB.count - sentenceA.count))
+                    removeSentence.append(sentenceB)
+                elif (sentenceB.cells).issubset(sentenceA.cells):
+                    temp.append(Sentence(sentenceA.cells - sentenceB.cells, sentenceA.count - sentenceB.count))
+                    removeSentence.append(sentenceA)                    
         
         for __ in temp:
             self.knowledge.append(__)
+
+        for __ in removeSentence:
+            self.knowledge.remove(__)
 
         return
         raise NotImplementedError
