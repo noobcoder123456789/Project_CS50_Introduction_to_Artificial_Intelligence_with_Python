@@ -104,22 +104,28 @@ class Sentence():
     def known_mines(self):
         """
         Returns the set of all cells in self.cells known to be mines.
-        """
-        return None
+        """        
+        if self.count > 0 and self.count == len(self.cells):
+            return self.cells
+        
+        return set()
         raise NotImplementedError
 
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        return None
+        if self.count == 0:
+            return self.cells
+        
+        return set()
         raise NotImplementedError
 
     def mark_mine(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
-        """
+        """        
         if len(self.cells) > 0 and cell in self.cells:
             self.cells.remove(cell)
             self.count -= 1
@@ -130,7 +136,7 @@ class Sentence():
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
-        """
+        """        
         if len(self.cells) > 0 and cell in self.cells:
             self.cells.remove(cell)
         return
@@ -193,59 +199,54 @@ class MinesweeperAI():
         """
         self.moves_made.add(cell)
         self.mark_safe(cell)
-
-        cellsss = []
+        
+        cellSentence = set()
         for i in range(cell[0] - 1, cell[0] + 2):
             for j in range(cell[1] - 1, cell[1] + 2):
+                if (i, j) == cell or (i, j) in self.safes or (i, j) in self.mines:
+                    count -= (i, j) in self.mines
+                    continue                
 
-                # Ignore the cell itself
-                if (i, j) == cell:
-                    continue
-
-                # Update count if cell in bounds and is mine
                 if 0 <= i < self.height and 0 <= j < self.width:
-                    cellsss.append((i, j))
-
-        self.knowledge.append(Sentence(cellsss, count))
-
-        tempSafe = set()
-        tempMine = set()
-        for sentence in self.knowledge:
-            if sentence.count == 0:
-                for cellss in sentence.cells:                    
-                    tempSafe.add(cellss)
-            elif sentence.count == len(sentence.cells):
-                for cellss in sentence.cells:
-                    tempMine.add(cellss)
-
-        for cellss in tempSafe:
-            self.mark_safe(cellss)
-
-        for cellss in tempMine:
-            self.mark_mine(cellss)
-
-        # AI conclude additional knowledge
-        temp = list()
-        removeSentence = list()
-        for i in range(len(self.knowledge)):
-            sentenceA = self.knowledge[i]
-            for j in range(len(self.knowledge)):
-                sentenceB = self.knowledge[j]
-                if sentenceA == sentenceB:
-                    continue
-
-                if (sentenceA.cells).issubset(sentenceB.cells):
-                    temp.append(Sentence(sentenceB.cells - sentenceA.cells, sentenceB.count - sentenceA.count))
-                    removeSentence.append(sentenceB)
-                elif (sentenceB.cells).issubset(sentenceA.cells):
-                    temp.append(Sentence(sentenceA.cells - sentenceB.cells, sentenceA.count - sentenceB.count))
-                    removeSentence.append(sentenceA)                    
+                    cellSentence.add((i, j))
         
-        for __ in temp:
-            self.knowledge.append(__)
+        self.knowledge.append(Sentence(cellSentence, count))
 
-        for __ in removeSentence:
-            self.knowledge.remove(__)
+        flag = True
+        while flag:
+            flag = False
+            mines = set()
+            safes = set()
+            for sentence in self.knowledge:
+                if sentence.count == 0:
+                    flag = True
+                    safes.update(sentence.cells)
+                elif sentence.count == len(sentence.cells):
+                    flag = True
+                    mines.update(sentence.cells)
+
+            for cells in mines:
+                self.mark_mine(cells)
+            
+            for cells in safes:
+                self.mark_safe(cells)
+
+            newKnowledge = []
+            for sentence in self.knowledge:
+                if len(sentence.cells) > 0:
+                    newKnowledge.append(sentence)
+            
+            self.knowledge = newKnowledge
+            for sentenceA in self.knowledge:
+                for sentenceB in self.knowledge:
+                    if sentenceA == sentenceB:
+                        continue
+
+                    if (sentenceA.cells).issubset(sentenceB.cells):
+                        newSentences = Sentence(sentenceB.cells - sentenceA.cells, sentenceB.count - sentenceA.count)
+                        if newSentences not in self.knowledge:
+                            flag = True
+                            self.knowledge.append(newSentences)
 
         return
         raise NotImplementedError
