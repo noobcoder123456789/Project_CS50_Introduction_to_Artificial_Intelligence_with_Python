@@ -12,7 +12,7 @@ Given this information, a logical player could conclude that there must be a min
 
 The goal of the game is to flag (i.e., identify) each of the mines. In many implementations of the game, including the one in this project, the player can flag a mine by right-clicking on a cell (or two-finger clicking, depending on the computer).
 
-# Propositional Logic
+**Propositional Logic**
 
 Your goal in this project will be to build an AI that can play Minesweeper. Recall that knowledge-based agents make decisions by considering their knowledge base, and making inferences based on that knowledge.
 
@@ -47,7 +47,7 @@ That’s quite a complicated expression! And that’s just to express what it me
 
 Trying to perform model checking on this type of problem, too, would quickly become intractable: on an 8x8 grid, the size Microsoft uses for its Beginner level, we’d have 64 variables, and therefore $2^{64}$ possible models to check – far too many for a computer to compute in any reasonable amount of time. We need a better representation of knowledge for this problem.
 
-# Knowledge Representation
+**Knowledge Representation**
 
 Instead, we’ll represent each sentence of our AI’s knowledge like the below.
 
