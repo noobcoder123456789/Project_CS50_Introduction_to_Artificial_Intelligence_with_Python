@@ -8,6 +8,6 @@ The function initial_state returns the starting state of the board. For this pro
 # Specification
 Complete the implementations of player, actions, result, winner, terminal, utility, and minimax.
 
-  The player function should take a board state as input, and return which player’s turn it is (either X or O).
-In the initial game state, X gets the first move. Subsequently, the player alternates with each additional move.
-Any return value is acceptable if a terminal board is provided as input (i.e., the game is already over).
+* The player function should take a board state as input, and return which player’s turn it is (either X or O).
+  * In the initial game state, X gets the first move. Subsequently, the player alternates with each additional move.
+  * Any return value is acceptable if a terminal board is provided as input (i.e., the game is already over).
