@@ -40,4 +40,4 @@ Add knowledge to knowledge bases `knowledge0`, `knowledge1`, `knowledge2`, and `
   * C says “A is a knight.”
 In each of the above puzzles, each character is either a knight or a knave. Every sentence spoken by a knight is true, and every sentence spoken by a knave is false.
 
-Once you’ve completed the knowledge base for a problem, you should be able to run *python puzzle.py` to see the solution to the puzzle.
+Once you’ve completed the knowledge base for a problem, you should be able to run `python puzzle.py` to see the solution to the puzzle.
