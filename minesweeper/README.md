@@ -24,11 +24,14 @@ What information does the AI have access to? Well, the AI would know every time 
 
 What information do we have now? It appears we now know that one of the eight neighboring cells is a mine. Therefore, we could write a logical expression like the below to indicate that one of the neighboring cells is a mine.
 
-> Or(A, B, C, D, E, F, G, H)
+```
+Or(A, B, C, D, E, F, G, H)
+```
 
 But we actually know more than what this expression says. The above logical sentence expresses the idea that at least one of those eight variables is true. But we can make a stronger statement than that: we know that exactly one of the eight variables is true. This gives us a propositional logic sentence like the below.
 
-> Or(
+```
+Or(
     And(A, Not(B), Not(C), Not(D), Not(E), Not(F), Not(G), Not(H)),
     And(Not(A), B, Not(C), Not(D), Not(E), Not(F), Not(G), Not(H)),
     And(Not(A), Not(B), C, Not(D), Not(E), Not(F), Not(G), Not(H)),
@@ -38,3 +41,4 @@ But we actually know more than what this expression says. The above logical sent
     And(Not(A), Not(B), Not(C), Not(D), Not(E), Not(F), G, Not(H)),
     And(Not(A), Not(B), Not(C), Not(D), Not(E), Not(F), Not(G), H)
 )
+```
