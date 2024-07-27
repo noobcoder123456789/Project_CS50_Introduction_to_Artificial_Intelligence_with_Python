@@ -4,7 +4,7 @@
 
 Minesweeper is a puzzle game that consists of a grid of cells, where some of the cells contain hidden “mines.” Clicking on a cell that contains a mine detonates the mine, and causes the user to lose the game. Clicking on a “safe” cell (i.e., a cell that does not contain a mine) reveals a number that indicates how many neighboring cells – where a neighbor is a cell that is one square to the left, right, up, down, or diagonal from the given cell – contain a mine.
 
-In this 3x3 Minesweeper game, for example, the three *1* values indicate that each of those cells has one neighboring cell that is a mine. The four *0* values indicate that each of those cells has no neighboring mine.
+In this 3x3 Minesweeper game, for example, the three `1` values indicate that each of those cells has one neighboring cell that is a mine. The four `0` values indicate that each of those cells has no neighboring mine.
 
 ![image](https://github.com/user-attachments/assets/99744413-3336-4d76-a440-18e46f09a289)
 
@@ -25,3 +25,16 @@ What information does the AI have access to? Well, the AI would know every time 
 What information do we have now? It appears we now know that one of the eight neighboring cells is a mine. Therefore, we could write a logical expression like the below to indicate that one of the neighboring cells is a mine.
 
 > Or(A, B, C, D, E, F, G, H)
+
+But we actually know more than what this expression says. The above logical sentence expresses the idea that at least one of those eight variables is true. But we can make a stronger statement than that: we know that exactly one of the eight variables is true. This gives us a propositional logic sentence like the below.
+
+> Or(
+    And(A, Not(B), Not(C), Not(D), Not(E), Not(F), Not(G), Not(H)),
+    And(Not(A), B, Not(C), Not(D), Not(E), Not(F), Not(G), Not(H)),
+    And(Not(A), Not(B), C, Not(D), Not(E), Not(F), Not(G), Not(H)),
+    And(Not(A), Not(B), Not(C), D, Not(E), Not(F), Not(G), Not(H)),
+    And(Not(A), Not(B), Not(C), Not(D), E, Not(F), Not(G), Not(H)),
+    And(Not(A), Not(B), Not(C), Not(D), Not(E), F, Not(G), Not(H)),
+    And(Not(A), Not(B), Not(C), Not(D), Not(E), Not(F), G, Not(H)),
+    And(Not(A), Not(B), Not(C), Not(D), Not(E), Not(F), Not(G), H)
+)
