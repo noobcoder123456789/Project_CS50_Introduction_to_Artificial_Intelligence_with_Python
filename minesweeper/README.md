@@ -130,4 +130,4 @@ In the `MinesweeperAI` class, complete the implementations of `add_knowledge`, `
     * This function will be called if a safe move is not possible: if the AI doesn’t know where to move, it will choose to move randomly instead.
     * The move must not be a move that has already been made.
     * The move must not be a move that is known to be a mine.
-    * If no such moves are possible, the function should return None.
+    * If no such moves are possible, the function should return `None`.
