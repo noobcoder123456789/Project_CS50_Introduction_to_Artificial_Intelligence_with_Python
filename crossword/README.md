@@ -87,14 +87,14 @@ The `order_domain_values` function should return a list of all of the values in 
 * For domain values that eliminate the same number of possible choices for neighboring variables, any ordering is acceptable.
 * Recall that you can access `self.crossword.overlaps` to get the overlap, if any, between two variables.
 * It may be helpful to first implement this function by returning a list of values in any arbitrary order (which should still generate correct crossword puzzles). Once your algorithm is working, you can then go back and ensure that the values are returned in the correct order.
-* You may find it helpful to [sort]([https://pages.github.com/](https://docs.python.org/3/howto/sorting.html) a list according to a particular `key`: Python contains some helpful functions for achieving this.
+* You may find it helpful to [sort]([https://docs.python.org/3/howto/sorting.html]) a list according to a particular `key`: Python contains some helpful functions for achieving this.
 
 The `select_unassigned_variable` function should return a single variable in the crossword puzzle that is not yet assigned by `assignment`, according to the minimum remaining value heuristic and then the degree heuristic.
 
 * An `assignment` is a dictionary where the keys are `Variable` objects and the values are strings representing the words those variables will take on. You may assume that the assignment will not be complete: not all variables will be present in the assignment.
 * Your function should return a `Variable` object. You should return the variable with the fewest number of remaining values in its domain. If there is a tie between variables, you should choose among whichever among those variables has the largest degree (has the most neighbors). If there is a tie in both cases, you may choose arbitrarily among tied variables.
 * It may be helpful to first implement this function by returning any arbitrary unassigned variable (which should still generate correct crossword puzzles). Once your algorithm is working, you can then go back and ensure that you are returning a variable according to the heuristics.
-* You may find it helpful to [sort]([https://pages.github.com/](https://docs.python.org/3/howto/sorting.html) a list according to a particular `key`: Python contains some helpful functions for achieving this.
+* You may find it helpful to [sort]([https://docs.python.org/3/howto/sorting.html]) a list according to a particular `key`: Python contains some helpful functions for achieving this.
 
 The `backtrack` function should accept a partial assignment `assignment` as input and, using backtracking search, return a complete satisfactory assignment of variables to values if it is possible to do so.
 
