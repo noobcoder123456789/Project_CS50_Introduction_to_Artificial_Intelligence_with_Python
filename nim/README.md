@@ -10,10 +10,10 @@ How will we represent the states and actions inside of a Python program? A “st
 Recall that the key formula for Q-learning is below. Every time we are in a state `s` and take an action `a`, we can update the Q-value `Q(s, a)` according to:
 
 ```
-Q(s, a) <- Q(s, a) + alpha * (new value estimate - old value estimate)
+Q(s, a) <- Q(s, a) + `alpha` * (new value estimate - old value estimate)
 ```
 
-In the above formula, alpha is the learning rate (how much we value new information compared to information we already have). The new value estimate represents the sum of the reward received for the current action and the estimate of all the future rewards that the player will receive. The old value estimate is just the existing value for `Q(s, a)`. By applying this formula every time our AI takes a new action, over time our AI will start to learn which actions are better in any state.
+In the above formula, `alpha` is the learning rate (how much we value new information compared to information we already have). The new value estimate represents the sum of the reward received for the current action and the estimate of all the future rewards that the player will receive. The old value estimate is just the existing value for `Q(s, a)`. By applying this formula every time our AI takes a new action, over time our AI will start to learn which actions are better in any state.
 
 # Understanding
 First, open up nim.py. There are two classes defined in this file (Nim and NimAI) along with two functions (train and play). Nim, train, and play have already been implemented for you, while NimAI leaves a few functions left for you to implement.
@@ -27,7 +27,7 @@ Next, take a look at the NimAI class, which defines our AI that will learn to pl
 For example, if we wanted to set the Q-value of the state [0, 0, 0, 2] and the action (3, 2) to -1, we would write something like
 
 self.q[(0, 0, 0, 2), (3, 2)] = -1
-Notice, too, that every NimAI object has an alpha and epsilon value that will be used for Q-learning and for action selection, respectively.
+Notice, too, that every NimAI object has an `alpha` and epsilon value that will be used for Q-learning and for action selection, respectively.
 
 The update function is written for you, and takes as input state old_state, an action take in that state action, the resulting state after performing that action new_state, and an immediate reward for taking that action reward. The function then performs Q-learning by first getting the current Q-value for the state and action (by calling get_q_value), determining the best possible future rewards (by calling best_future_reward), and then using both of those values to update the Q-value (by calling update_q_value). Those three functions are left to you to implement.
 
@@ -44,8 +44,8 @@ Recall that Q-values are stored in the dictionary self.q. The keys of self.q sho
 If no Q-value for the state/action pair exists in self.q, then the function should return 0.
 The update_q_value function takes a state state, an action action, an existing Q value old_q, a current reward reward, and an estimate of future rewards future_rewards, and updates the Q-value for the state/action pair according to the Q-learning formula.
 
-Recall that the Q-learning formula is: `Q(s, a)` <- old value estimate + alpha * (new value estimate - old value estimate)
-Recall that alpha is the learning rate associated with the NimAI object.
+Recall that the Q-learning formula is: `Q(s, a)` <- old value estimate + `alpha` * (new value estimate - old value estimate)
+Recall that `alpha` is the learning rate associated with the NimAI object.
 The old value estimate is just the existing Q-value for the state/action pair. The new value estimate should be the sum of the current reward and the estimated future reward.
 The best_future_reward function accepts a state as input and returns the best possible reward for any available action in that state, according to the data in self.q.
 
