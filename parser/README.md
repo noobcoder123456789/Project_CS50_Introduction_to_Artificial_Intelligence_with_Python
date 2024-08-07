@@ -43,4 +43,4 @@ Complete the implementation of `preprocess` and `np_chunk`, and complete the con
  * You may assume that the input will be a `nltk.tree` object whose label is `S` (that is to say, the input will be a tree representing a sentence).
 Your function should return a list of `nltk.tree` objects, where each element has the label `NP`.
 You will likely find the documentation for [`nltk.tree`](https://www.nltk.org/_modules/nltk/tree.html) helpful for identifying how to manipulate a `nltk.tree` object.
-You should not modify anything else in `parser.py` other than the functions the specification calls for you to implement, though you may write additional functions and/or import other Python standard library modules. You will need to modify the definition of `NONTERMINALS`, but you should not modify the definition of `TERMINALS`. ``
+You should not modify anything else in `parser.py` other than the functions the specification calls for you to implement, though you may write additional functions and/or import other Python standard library modules. You will need to modify the definition of `NONTERMINALS`, but you should not modify the definition of `TERMINALS`. 
