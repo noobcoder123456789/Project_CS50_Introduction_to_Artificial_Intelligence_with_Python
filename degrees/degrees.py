@@ -89,37 +89,37 @@ def shortest_path(source, target):
     that connect the source to the target.
     If no possible path, returns None.
     """
-    
     if source == target:
-        return None
+        return list()
     
+    s = Node(state=source, parent=None, action=None)
     q = QueueFrontier()
-    visitMovie = set()
-    visitPerson = set()
-    
-    nfp = neighbors_for_person(str(source))
-    for x in nfp:
-        q.add([x])
-        visitMovie.add(x[0])
-        visitPerson.add(x[1])
+    q.add(s)
+    visit = set()
 
     while True:
         if q.empty():
             return None
         
-        state = q.remove()
-        
-        if state[len(state) - 1][1] == str(target):
-            return state
-                
-        nfp = neighbors_for_person(str(state[len(state) - 1][1]))
-        for x in nfp:            
-            if not(x[0] in visitMovie) and not(x[1] in visitPerson):
-                temp = state
-                temp.append((x[0], x[1]))
-                visitMovie.add(x[0])
-                visitPerson.add(x[1])
-                q.add(temp)
+        par = q.remove()
+        visit.add(par.state)
+        nfp = neighbors_for_person(par.state)
+        for movie, actor in nfp:
+            if not (actor not in visit and not q.contains_state(actor)):
+                continue
+
+            child = Node(state=actor, parent=par, action=movie)
+            if child.state != target:
+                q.add(child)
+                continue
+            
+            path = list()
+            temp = child
+            while temp.parent: 
+                path.append((temp.action, temp.state))
+                temp = temp.parent
+            path.reverse()
+            return path
 
     raise NotImplementedError
     
